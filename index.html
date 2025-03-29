@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kỷ Niệm Ngày Yêu Nhau</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #333;
+            text-align: center;
+            overflow: hidden;
+        }
+        
+        .container {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        h1 {
+            color: #e74c3c;
+            margin-bottom: 20px;
+        }
+        
+        .anniversary-date {
+            font-size: 24px;
+            margin-bottom: 30px;
+            color: #e74c3c;
+            font-weight: bold;
+        }
+        
+        .message {
+            font-size: 18px;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+        
+        .heart {
+            color: #e74c3c;
+            font-size: 30px;
+            animation: beat 1s infinite alternate;
+            display: inline-block;
+        }
+        
+        @keyframes beat {
+            to {
+                transform: scale(1.2);
+            }
+        }
+        
+        .photo-frame {
+            width: 200px;
+            height: 200px;
+            border: 5px solid #fff;
+            border-radius: 50%;
+            margin: 20px auto;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            background-color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .photo-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .floating-hearts {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        .floating-hearts span {
+            position: absolute;
+            color: rgba(231, 76, 60, 0.6);
+            font-size: 20px;
+            animation: float-up 4s linear infinite;
+        }
+        
+        @keyframes float-up {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            20% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) rotate(720deg);
+                opacity: 0;
+            }
+        }
+        
+        button {
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 50px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 10px;
+        }
+        
+        button:hover {
+            background-color: #c0392b;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-hearts" id="hearts-container"></div>
+    
+    <div class="container">
+        <h1>Chúc Mừng Kỷ Niệm <span class="heart">❤</span></h1>
+        
+        <div class="anniversary-date" id="anniversary-date"></div>
+        
+        <div class="photo-frame">
+            <!-- Thay thế đường dẫn ảnh bằng ảnh của bạn -->
+            <img src="https://via.placeholder.com/200x200" alt="Ảnh cặp đôi" id="couple-photo">
+        </div>
+        
+        <div class="message" id="message">
+            Hôm nay là một ngày thật đặc biệt, ngày kỷ niệm tình yêu của chúng ta. 
+            Cảm ơn em/anh vì đã ở bên cạnh anh/em trong suốt thời gian qua. 
+            Mỗi ngày bên em/anh là một ngày hạnh phúc. 
+            Chúc chúng ta có thật nhiều kỷ niệm đẹp hơn nữa trong tương lai!
+        </div>
+        
+        <button onclick="showSpecialMessage()">Nhấn để xem lời nhắn đặc biệt</button>
+    </div>
+
+    <script>
+        // Thiết lập ngày kỷ niệm
+        const anniversaryDate = new Date(); // Thay đổi thành ngày thực tế
+        // Ví dụ: new Date(2020, 4, 20) - 20/5/2020
+        
+        const options = { year: 'numeric', month: 'long', day: 'numeric' };
+        document.getElementById('anniversary-date').textContent = 
+            anniversaryDate.toLocaleDateString('vi-VN', options);
+            
+        // Tính số ngày yêu nhau
+        const today = new Date();
+        const diffTime = Math.abs(today - anniversaryDate);
+        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+        
+        // Tạo trái tim bay
+        function createHearts() {
+            const heartsContainer = document.getElementById('hearts-container');
+            const heart = document.createElement('span');
+            heart.innerHTML = '❤';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = Math.random() * 3 + 2 + 's';
+            heart.style.fontSize = Math.random() * 20 + 10 + 'px';
+            heartsContainer.appendChild(heart);
+            
+            setTimeout(() => {
+                heart.remove();
+            }, 5000);
+        }
+        
+        setInterval(createHearts, 300);
+        
+        // Lời nhắn đặc biệt
+        function showSpecialMessage() {
+            const message = `Chúng ta đã bên nhau được ${diffDays} ngày rồi đó! 
+            Mỗi ngày trôi qua đều là một món quà khi có em/anh bên cạnh. 
+            Anh/em yêu em/anh nhiều hơn mỗi ngày! ❤`;
+            
+            document.getElementById('message').innerHTML = message;
+            
+            // Đổi ảnh khi nhấn nút (thay bằng ảnh thực tế)
+            document.getElementById('couple-photo').src = "https://via.placeholder.com/200x200/ffcccc";
+        }
+        
+        // Bạn có thể thêm nhiều tính năng khác như nhạc, album ảnh,...
+    </script>
+</body>
+</html>
